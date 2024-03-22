@@ -25,7 +25,7 @@ exports.registrarUsuario = async (req, res) => {
         // Crear token de acceso
         const payload = {
             usuario: {
-                id: usuario._id
+                _id: usuario._id
             }
         };
 
@@ -42,24 +42,25 @@ exports.registrarUsuario = async (req, res) => {
 
 exports.iniciarSesion = async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const { email, contraseña } = req.body;
 
         // Verificar si el usuario existe
         let usuario = await Usuario.findOne({ email });
+       
         if (!usuario) {
-            return res.status(400).json({ mensaje: 'Credenciales inválidas' });
+            return res.status(400).json({ mensaje: 'Usuario inválido' });
         }
 
         // Verificar contraseña
-        const esMatch = await bcrypt.compare(password, usuario.password);
+        const esMatch = await bcrypt.compare(contraseña, usuario.contraseña);
         if (!esMatch) {
-            return res.status(400).json({ mensaje: 'Credenciales inválidas' });
+            return res.status(400).json({ mensaje: 'Contraseña inválida' });
         }
 
         // Crear token de acceso
         const payload = {
             usuario: {
-                id: usuario.id
+                _id: usuario._id
             }
         };
 
