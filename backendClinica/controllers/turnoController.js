@@ -3,11 +3,11 @@ const Turno = require('../Models/turnosModel');
 exports.crearTurno = async (req, res) => {
     try {
         
-        const { pacienteId, doctorId, fecha, motivo } = req.body;
+        const { paciente, doctor, fecha, motivo } = req.body;
 
         const turno = new Turno({
-            pacienteId,
-            doctorId,
+            paciente,
+            doctor,
             fecha,
             motivo
         });

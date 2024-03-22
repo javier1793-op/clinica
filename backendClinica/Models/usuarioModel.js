@@ -11,6 +11,11 @@ const userSchema = schema({
     type: String,
     required: true,
   },
+  email: {
+    type: String,
+    required: true,
+    unique: true
+},
   doctor: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Doctor",
@@ -18,4 +23,4 @@ const userSchema = schema({
   },
 });
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("Usuario", userSchema);

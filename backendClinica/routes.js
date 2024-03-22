@@ -4,7 +4,8 @@ const router = express.Router();
 //Iimportacion de controladores
 const pacienteController = require('./controllers/pacienteController');
 const turnosController = require('./controllers/turnoController');
-const doctoresController = require('./controllers/doctorController')
+const doctoresController = require('./controllers/doctorController');
+const usuariosController = require('./controllers/usuariosController')
 
 //PACIENTES
 // Ruta para crear un nuevo paciente
@@ -42,5 +43,11 @@ router.get('/doctor/:id', doctoresController.obtenerDoctorPorId);
 router.put('/doctor/:id', doctoresController.modificarDoctor);
 // Ruta para eliminar un doctor
 router.delete('/doctor/:id', doctoresController.eliminarDoctor);
+
+//USUARIOS
+// Ruta para crear un nuevo usuario
+router.post('/registro', usuariosController.registrarUsuario);
+// Ruta para iniciar sesión
+router.post('/login', usuariosController.iniciarSesion);
 
 module.exports = router;
