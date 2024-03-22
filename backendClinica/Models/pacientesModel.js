@@ -22,6 +22,11 @@ const pacientesSchema = schema({
   teléfono: {
     type: String,
   },
+    dni: {
+    type: String,
+    required: true,
+    unique: true,
+  },
 });
 
 module.exports = mongoose.model("Paciente", pacientesSchema);

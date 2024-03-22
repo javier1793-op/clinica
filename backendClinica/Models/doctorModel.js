@@ -15,6 +15,14 @@ const doctorSchema = schema({
     required: true,
     unique: true,
   },
+  especialidad: {
+    type: String,
+    required: true,
+  },
+  telefono: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("Doctor", doctorSchema);

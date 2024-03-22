@@ -7,6 +7,11 @@ const turnosSchema = schema({
     ref: "Paciente",
     required: true,
   },
+  doctor: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Doctor",
+    required: true,
+  }, 
   fecha: {
     type: Date,
     required: true,

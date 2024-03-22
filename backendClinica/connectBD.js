@@ -1,5 +1,5 @@
 const mongoose = require ("mongoose");
-const User = require('./Routes/Models/usuarioModel')
+const User = require('./Models/usuarioModel')
 
 const connectDB = async ()=>{
     try {
