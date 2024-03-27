@@ -15,10 +15,10 @@ import { getUserData, getHomeRouteForLoggedInUser } from '../utility/Utils'
 
 // ** GetRoutes
 import { getRoutes } from './routes'
+import LoginBasic from '../views/pages/authentication/LoginBasic'
 
 // ** Components
 const Error = lazy(() => import('../views/pages/misc/Error'))
-const Login = lazy(() => import('../views/pages/authentication/Login'))
 const NotAuthorized = lazy(() => import('../views/pages/misc/NotAuthorized'))
 
 const Router = () => {
@@ -31,7 +31,7 @@ const Router = () => {
     if (user) {
       return getHomeRouteForLoggedInUser(user.role)
     } else {
-      return '/login'
+      return '/login-basic'
     }
   }
 
@@ -42,9 +42,9 @@ const Router = () => {
       element: <Navigate replace to={getHomeRoute()} />
     },
     {
-      path: '/login',
+      path: '/login-basic',
       element: <BlankLayout />,
-      children: [{ path: '/login', element: <Login /> }]
+      children: [{ path: '/login-basic', element: <LoginBasic /> }]
     },
     {
       path: '/auth/not-auth',

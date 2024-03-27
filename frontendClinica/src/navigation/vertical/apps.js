@@ -1,17 +1,31 @@
 // ** Icons Import
-import { Mail, MessageSquare, CheckSquare, Calendar, FileText, Circle, ShoppingCart, User, Shield } from 'react-feather'
+import { Mail, MessageSquare, CheckSquare, Calendar, FileText, Circle, ShoppingCart, User, Shield,Server } from 'react-feather'
 
 export default [
   {
-    header: 'Apps & Pages'
+    header: 'Modulos'
+  },
+ 
+  {
+    id: 'calendario',
+    title: 'Calendar',
+    icon: <Calendar size={20} />,
+    navLink: '/apps/calendar'
   },
   {
-    id: 'email',
-    title: 'Email',
-    icon: <Mail size={20} />,
-    navLink: '/apps/email'
+    id: 'list',
+    title: 'Pacientes',
+    icon: <User size={20} />,
+    navLink: '/apps/user/list'
   },
   {
+    id: 'list',
+    title: 'Turnos',
+    icon: <Server size={20} />,
+    navLink: '/apps/user/list2'
+  }
+  /*
+{
     id: 'chat',
     title: 'Chat',
     icon: <MessageSquare size={20} />,
@@ -22,12 +36,6 @@ export default [
     title: 'Todo',
     icon: <CheckSquare size={20} />,
     navLink: '/apps/todo'
-  },
-  {
-    id: 'calendar',
-    title: 'Calendar',
-    icon: <Calendar size={20} />,
-    navLink: '/apps/calendar'
   },
   {
     id: 'kanban',
@@ -134,6 +142,9 @@ export default [
         icon: <Circle size={12} />,
         navLink: '/apps/user/view'
       }
+
+*/
+  
     ]
-  }
-]
+  
+

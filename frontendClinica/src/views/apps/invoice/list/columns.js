@@ -52,11 +52,6 @@ const renderClient = row => {
     states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
     color = states[stateNum]
 
-  if (row.avatar.length) {
-    return <Avatar className='me-50' img={row.avatar} width='32' height='32' />
-  } else {
-    return <Avatar color={color} className='me-50' content={row.client ? row.client.name : 'John Doe'} initials />
-  }
 }
 
 // ** Table columns
@@ -69,31 +64,9 @@ export const columns = [
     // selector: row => row.id,
     cell: row => <Link to={`/apps/invoice/preview/${row.id}`}>{`#${row.id}`}</Link>
   },
+  
   {
-    sortable: true,
-    minWidth: '102px',
-    sortField: 'invoiceStatus',
-    name: <TrendingUp size={14} />,
-    // selector: row => row.invoiceStatus,
-    cell: row => {
-      const color = invoiceStatusObj[row.invoiceStatus] ? invoiceStatusObj[row.invoiceStatus].color : 'primary',
-        Icon = invoiceStatusObj[row.invoiceStatus] ? invoiceStatusObj[row.invoiceStatus].icon : Edit
-      return (
-        <Fragment>
-          <Avatar color={color} icon={<Icon size={14} />} id={`av-tooltip-${row.id}`} />
-          <UncontrolledTooltip placement='top' target={`av-tooltip-${row.id}`}>
-            <span className='fw-bold'>{row.invoiceStatus}</span>
-            <br />
-            <span className='fw-bold'>Balance:</span> {row.balance}
-            <br />
-            <span className='fw-bold'>Due Date:</span> {row.dueDate}
-          </UncontrolledTooltip>
-        </Fragment>
-      )
-    }
-  },
-  {
-    name: 'Client',
+    name: 'Paciente',
     sortable: true,
     minWidth: '350px',
     sortField: 'client.name',
@@ -113,7 +86,7 @@ export const columns = [
     }
   },
   {
-    name: 'Total',
+    name: 'Fecha',
     sortable: true,
     minWidth: '150px',
     sortField: 'total',
@@ -122,25 +95,24 @@ export const columns = [
   },
   {
     sortable: true,
-    minWidth: '200px',
-    name: 'Issued Date',
-    sortField: 'dueDate',
-    cell: row => row.dueDate
-    // selector: row => row.dueDate
-  },
-  {
-    sortable: true,
-    name: 'Balance',
-    minWidth: '164px',
-    sortField: 'balance',
-    // selector: row => row.balance,
+    minWidth: '102px',
+    sortField: 'invoiceStatus',
+    name: 'Estado',
+    // selector: row => row.invoiceStatus,
     cell: row => {
-      return row.balance !== 0 ? (
-        <span>{row.balance}</span>
-      ) : (
-        <Badge color='light-success' pill>
-          Paid
-        </Badge>
+      const color = invoiceStatusObj[row.invoiceStatus] ? invoiceStatusObj[row.invoiceStatus].color : 'primary',
+        Icon = invoiceStatusObj[row.invoiceStatus] ? invoiceStatusObj[row.invoiceStatus].icon : Edit
+      return (
+        <Fragment>
+          <Avatar color={color} icon={<Icon size={14} />} id={`av-tooltip-${row.id}`} />
+          <UncontrolledTooltip placement='top' target={`av-tooltip-${row.id}`}>
+            <span className='fw-bold'>{row.invoiceStatus}</span>
+            <br />
+            <span className='fw-bold'>Balance:</span> {row.balance}
+            <br />
+            <span className='fw-bold'>Due Date:</span> {row.dueDate}
+          </UncontrolledTooltip>
+        </Fragment>
       )
     }
   },
@@ -149,15 +121,12 @@ export const columns = [
     minWidth: '110px',
     cell: row => (
       <div className='column-action d-flex align-items-center'>
-        <Send className='cursor-pointer' size={17} id={`send-tooltip-${row.id}`} />
-        <UncontrolledTooltip placement='top' target={`send-tooltip-${row.id}`}>
-          Send Mail
-        </UncontrolledTooltip>
+        
         <Link to={`/apps/invoice/preview/${row.id}`} id={`pw-tooltip-${row.id}`}>
           <Eye size={17} className='mx-1' />
         </Link>
         <UncontrolledTooltip placement='top' target={`pw-tooltip-${row.id}`}>
-          Preview Invoice
+          Detalle del Turno
         </UncontrolledTooltip>
         <UncontrolledDropdown>
           <DropdownToggle tag='span'>
@@ -166,11 +135,11 @@ export const columns = [
           <DropdownMenu end>
             <DropdownItem tag='a' href='/' className='w-100' onClick={e => e.preventDefault()}>
               <Download size={14} className='me-50' />
-              <span className='align-middle'>Download</span>
+              <span className='align-middle'>Imprimir</span>
             </DropdownItem>
             <DropdownItem tag={Link} to={`/apps/invoice/edit/${row.id}`} className='w-100'>
               <Edit size={14} className='me-50' />
-              <span className='align-middle'>Edit</span>
+              <span className='align-middle'>Editar</span>
             </DropdownItem>
             <DropdownItem
               tag='a'
@@ -182,12 +151,9 @@ export const columns = [
               }}
             >
               <Trash size={14} className='me-50' />
-              <span className='align-middle'>Delete</span>
+              <span className='align-middle'>Eliminar</span>
             </DropdownItem>
-            <DropdownItem tag='a' href='/' className='w-100' onClick={e => e.preventDefault()}>
-              <Copy size={14} className='me-50' />
-              <span className='align-middle'>Duplicate</span>
-            </DropdownItem>
+            
           </DropdownMenu>
         </UncontrolledDropdown>
       </div>

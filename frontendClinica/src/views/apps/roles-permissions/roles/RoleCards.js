@@ -45,156 +45,8 @@ import avatar12 from '@src/assets/images/avatars/12.png'
 
 // ** Vars
 const data = [
-  {
-    totalUsers: 4,
-    title: 'Administrator',
-    users: [
-      {
-        size: 'sm',
-        title: 'Vinnie Mostowy',
-        img: avatar2
-      },
-      {
-        size: 'sm',
-        title: 'Allen Rieske',
-        img: avatar12
-      },
-      {
-        size: 'sm',
-        title: 'Julee Rossignol',
-        img: avatar6
-      },
-      {
-        size: 'sm',
-        title: 'Kaith Dsouza',
-        img: avatar11
-      }
-    ]
-  },
-  {
-    totalUsers: 7,
-    title: 'Manager',
-    users: [
-      {
-        size: 'sm',
-        title: 'Jimmy Ressula',
-        img: avatar4
-      },
-      {
-        size: 'sm',
-        title: 'John Doe',
-        img: avatar1
-      },
-      {
-        size: 'sm',
-        title: 'Kristi Lawker',
-        img: avatar2
-      },
-      {
-        size: 'sm',
-        title: 'Kaith D',
-        img: avatar5
-      },
-      {
-        size: 'sm',
-        title: 'Danny Paul',
-        img: avatar7
-      }
-    ]
-  },
-  {
-    totalUsers: 5,
-    title: 'Users',
-    users: [
-      {
-        size: 'sm',
-        title: 'Andrew Tye',
-        img: avatar6
-      },
-      {
-        size: 'sm',
-        title: 'Rishi Swaat',
-        img: avatar9
-      },
-      {
-        size: 'sm',
-        title: 'Rossie Kim',
-        img: avatar2
-      },
-      {
-        size: 'sm',
-        title: 'Kim Merchent',
-        img: avatar10
-      },
-      {
-        size: 'sm',
-        title: 'Sam Dsouza',
-        img: avatar8
-      }
-    ]
-  },
-  {
-    totalUsers: 3,
-    title: 'Support',
-    users: [
-      {
-        size: 'sm',
-        title: 'Kim Karlos',
-        img: avatar3
-      },
-      {
-        size: 'sm',
-        title: 'Katy Turner',
-        img: avatar9
-      },
-      {
-        size: 'sm',
-        title: 'Peter Adward',
-        img: avatar12
-      },
-      {
-        size: 'sm',
-        title: 'Kaith Dsouza',
-        img: avatar10
-      },
-      {
-        size: 'sm',
-        title: 'John Parker',
-        img: avatar11
-      }
-    ]
-  },
-  {
-    totalUsers: 2,
-    title: 'Restricted User',
-    users: [
-      {
-        size: 'sm',
-        title: 'Kim Merchent',
-        img: avatar10
-      },
-      {
-        size: 'sm',
-        title: 'Sam Dsouza',
-        img: avatar6
-      },
-      {
-        size: 'sm',
-        title: 'Nurvi Karlos',
-        img: avatar3
-      },
-      {
-        size: 'sm',
-        title: 'Andrew Tye',
-        img: avatar8
-      },
-      {
-        size: 'sm',
-        title: 'Rossie Kim',
-        img: avatar9
-      }
-    ]
-  }
+  
+  
 ]
 
 const rolesArr = [
@@ -253,27 +105,15 @@ const RoleCards = () => {
               <Card>
                 <CardBody>
                   <div className='d-flex justify-content-between'>
-                    <span>{`Total ${item.totalUsers} users`}</span>
+                    <span>{`Total ${item.totalUsers} Pacientes`}</span>
                     <AvatarGroup data={item.users} />
                   </div>
                   <div className='d-flex justify-content-between align-items-end mt-1 pt-25'>
                     <div className='role-heading'>
                       <h4 className='fw-bolder'>{item.title}</h4>
-                      <Link
-                        to='/'
-                        className='role-edit-modal'
-                        onClick={e => {
-                          e.preventDefault()
-                          setModalType('Edit')
-                          setShow(true)
-                        }}
-                      >
-                        <small className='fw-bolder'>Edit Role</small>
-                      </Link>
+                      
                     </div>
-                    <Link to='' className='text-body' onClick={e => e.preventDefault()}>
-                      <Copy className='font-medium-5' />
-                    </Link>
+                  
                   </div>
                 </CardBody>
               </Card>
@@ -298,9 +138,9 @@ const RoleCards = () => {
                       setShow(true)
                     }}
                   >
-                    Add New Role
+                    Ver Calendario
                   </Button>
-                  <p className='mb-0'>Add a new role, if it does not exist</p>
+                  <p className='mb-0'>Calenadario de Turnos</p>
                 </CardBody>
               </Col>
             </Row>

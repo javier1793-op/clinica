@@ -10,30 +10,20 @@ import { Card, CardHeader, CardTitle, CardBody, CardText, Row, Col } from 'react
 
 const StatsCard = ({ cols }) => {
   const data = [
+    
     {
-      title: '230k',
-      subtitle: 'Sales',
-      color: 'light-primary',
-      icon: <TrendingUp size={24} />
-    },
-    {
-      title: '8.549k',
-      subtitle: 'Customers',
+      title: '10',
+      subtitle: 'Hoy',
       color: 'light-info',
       icon: <User size={24} />
     },
     {
-      title: '1.423k',
-      subtitle: 'Products',
+      title: '50',
+      subtitle: 'Semana',
       color: 'light-danger',
-      icon: <Box size={24} />
+      icon: <User size={24} />
     },
-    {
-      title: '$9745',
-      subtitle: 'Revenue',
-      color: 'light-success',
-      icon: <DollarSign size={24} />
-    }
+   
   ]
 
   const renderData = () => {
@@ -63,8 +53,8 @@ const StatsCard = ({ cols }) => {
   return (
     <Card className='card-statistics'>
       <CardHeader>
-        <CardTitle tag='h4'>Statistics</CardTitle>
-        <CardText className='card-text font-small-2 me-25 mb-0'>Updated 1 month ago</CardText>
+        <CardTitle tag='h4'>Resumen Turnos</CardTitle>
+        <CardText className='card-text font-small-2 me-25 mb-0'>Actualizado hace 1 mes</CardText>
       </CardHeader>
       <CardBody className='statistics-body'>
         <Row>{renderData()}</Row>
