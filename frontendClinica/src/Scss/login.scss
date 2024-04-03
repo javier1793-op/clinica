@@ -1,0 +1,98 @@
+.containerLogin {
+  display: flex;
+  height: 100%;
+}
+.layaoutLogin {
+  background-image: url(../assets/Img/vuexy-login-bg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  flex: 2;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.formLogin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  flex: 2;
+  height: 100vh;
+  padding: 6rem  2rem ;
+  color: var(--black-main);
+}
+.formLogin .titleFormLogin h3{
+  color: var(--black-main);
+  font-size: 2rem;
+  font-weight: 500;
+}
+.formLogin .logoLogin{
+  width: 5rem;
+  height: 5rem;
+}
+.formLogin h4{
+  font-size: .9rem;
+  color: var(--black-main);
+  width: 25rem;
+  font-weight: 400;
+  text-align: justify;
+}
+.titleFormLogin{
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.iconLoginTitle{
+  font-size: 2.7rem;
+}
+.formLogin form{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+form label{
+  font-size: .8rem;
+}
+form input{
+  width: 25rem;
+  padding: .7rem 2rem;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+}
+.btnLogin{
+  width: 25rem;
+  padding: .7rem 2rem;
+  border-radius: 5px;
+  margin-top: 1rem;
+  cursor: pointer;
+  background-image: linear-gradient(
+    90deg,
+    hsl(352deg 72% 41%) 0%,
+    hsl(354deg 60% 47%) 0%,
+    hsl(354deg 55% 52%) 1%,
+    hsl(355deg 57% 56%) 5%,
+    hsl(355deg 61% 60%) 11%,
+    hsl(354deg 65% 64%) 20%,
+    hsl(354deg 69% 69%) 36%,
+    hsl(353deg 75% 73%) 58%,
+    hsl(353deg 82% 77%) 83%,
+    hsl(352deg 92% 80%) 100%
+  );
+  color: var(--white-main);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+}
+
+
+
+@media screen and (max-width: 950px) {
+  .layaoutLogin {
+    display: none;
+  }
+
+  .formLogin {
+    flex: 1;
+  }
+}

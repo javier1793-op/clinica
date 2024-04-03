@@ -20,7 +20,4 @@
   font-optical-sizing: auto;
   font-weight: weight;
   font-style: normal;
-  background: var(--backgroun-color);
-  min-width: 100%;
-  min-height: 100vh;
 }
