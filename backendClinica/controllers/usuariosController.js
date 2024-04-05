@@ -48,7 +48,7 @@ exports.iniciarSesion = async (req, res) => {
         let usuario = await Usuario.findOne({ email });
        
         if (!usuario) {
-            return res.status(400).json({ mensaje: 'Usuario inválido' });
+            return res.status(400).json({ mensaje: 'Email inválido' });
         }
 
         // Verificar contraseña

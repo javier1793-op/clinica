@@ -59,6 +59,10 @@ form input{
   padding: .7rem 2rem;
   border: 1px solid #dee2e6;
   border-radius: 5px;
+  outline: none;
+}
+form input:focus{
+  border: 2px solid var(--red1-main);
 }
 .btnLogin{
   width: 25rem;
@@ -84,7 +88,14 @@ form input{
   font-weight: 500;
   letter-spacing: 2px;
 }
-
+.errorFormLogin{
+  color: var(--red4-main);
+  font-weight: 600;
+  background:#ffccd5;
+  padding: .5rem 1rem;
+  width: 25rem;
+  text-align: center;
+}
 
 
 @media screen and (max-width: 950px) {
