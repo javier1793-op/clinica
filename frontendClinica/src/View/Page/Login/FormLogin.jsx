@@ -9,9 +9,7 @@ const FormLogin = () => {
   const onSubmit = handleSubmit(async (value) => {
     try {
       const res = await userSesion(value);
-      console.log(res.data);
     } catch (error) {
-      console.log(error.response.data);
       return setError([error.response.data.mensaje]);
     }
   });
@@ -26,15 +24,17 @@ const FormLogin = () => {
   return (
     <>
       {error.length > 0 && <span className="errorFormLogin">{error}</span>}
-      <form onClick={onSubmit}>
+      <form onSubmit={onSubmit}>
         <label>Email</label>
         <input
+          className="inputLogin"
           type="text"
           placeholder="Ingrese su Email"
           {...register("email", { required: true })}
         />
         <label>Contraseña</label>
         <input
+          className="inputLogin"
           type="password"
           placeholder="Ingrese su contraseña"
           {...register("contraseña", { required: true })}

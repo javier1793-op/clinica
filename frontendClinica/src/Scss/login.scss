@@ -1,3 +1,14 @@
+#root{
+  --red1-main:#df394f;
+  --red2-main:#ca2b41;
+  --red3-main:#b51d32;
+  --red4-main:#a00e24;
+  --red5-main:#8b0015;
+  --backgroun-color:#f1f1fe;
+  --white-main:#ffffff;
+  --black-main:#5b758f;
+}
+
 .containerLogin {
   display: flex;
   height: 100%;
@@ -54,14 +65,14 @@
 form label{
   font-size: .8rem;
 }
-form input{
+form .inputLogin{
   width: 25rem;
   padding: .7rem 2rem;
   border: 1px solid #dee2e6;
   border-radius: 5px;
   outline: none;
 }
-form input:focus{
+form .inputLogin:focus{
   border: 2px solid var(--red1-main);
 }
 .btnLogin{
