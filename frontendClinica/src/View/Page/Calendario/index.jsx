@@ -1,8 +1,13 @@
-
+import '../../../Scss/calendario.scss'
+import Calendar from './Calendar'
 
 const Calendario = () => {
   return (
-    <div>Calendario</div>
+    <div className="containerCalendar">
+      <div className="contentCalendar">
+        <Calendar/>
+      </div>
+    </div>
   )
 }
 

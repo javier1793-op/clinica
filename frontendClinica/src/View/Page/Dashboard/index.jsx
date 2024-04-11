@@ -16,6 +16,7 @@ export default function Dashboard() {
         <Head title={"Calendario de turnos"} />
         <main>
         {location.pathname === '/' ? <Calendario /> : <Outlet />}
+        
         </main>
       </div>
     </>
