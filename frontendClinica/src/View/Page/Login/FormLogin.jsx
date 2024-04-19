@@ -9,6 +9,8 @@ const FormLogin = () => {
   const onSubmit = handleSubmit(async (value) => {
     try {
       const res = await userSesion(value);
+      console.log(res.data.token)
+      localStorage.setItem('token', res.data.token)
     } catch (error) {
       return setError([error.response.data.mensaje]);
     }

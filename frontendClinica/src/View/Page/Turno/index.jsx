@@ -5,7 +5,7 @@ import { TableTurnos } from "./TableTurnos";
 import { Button } from "@tremor/react";
 import { TextInput } from "@tremor/react";
 import { RiSearchLine } from "@remixicon/react";
-import { DatePicker, DateRangePicker } from "@tremor/react";
+import { DatePicker} from "@tremor/react";
 
 const index = () => {
   return (

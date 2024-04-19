@@ -16,6 +16,7 @@ section{
     padding: 1rem;
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     gap: 2rem;
 }
 .IconAccion{
@@ -45,6 +46,8 @@ section{
     display: flex;
     justify-content: space-around;
     align-items: center;
+    flex-wrap:wrap;
+    gap: 1rem;
 }
 .inputSearch{
     width: 15rem;
