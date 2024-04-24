@@ -48,13 +48,13 @@ exports.iniciarSesion = async (req, res) => {
         let usuario = await Usuario.findOne({ email });
        
         if (!usuario) {
-            return res.status(400).json({ mensaje: 'Email inválido' });
+            return res.status(400).json({ mensaje: 'Datos Incorrecto' });
         }
 
         // Verificar contraseña
         const esMatch = await bcrypt.compare(contraseña, usuario.contraseña);
         if (!esMatch) {
-            return res.status(400).json({ mensaje: 'Contraseña inválida' });
+            return res.status(400).json({ mensaje: 'Datos Incorrecto' });
         }
 
         // Crear token de acceso

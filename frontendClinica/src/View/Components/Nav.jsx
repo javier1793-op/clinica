@@ -3,7 +3,9 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 
-import Logo from '../../assets/Img/2.png'
+import Logo from "../../assets/Img/2.png";
+import { useAppDispatch } from "../../Hooks/useAppSelector";
+import { logout } from "../../Store/slicer/auth.slice";
 
 const user = {
   name: "Tom Cook",
@@ -17,16 +19,22 @@ const navigation = [
   { name: "Pacientes", to: "/pacientes", current: false },
   { name: "Doctores", to: "/doctores", current: false },
 ];
-const userNavigation = [
-  { name: "Perfil", href: "#" },
-  { name: "Desconectarse", href: "#" },
-];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 const Nav = () => {
+  const userNavigation = [
+    { name: "Perfil", href: "#" },
+    { name: "Desconectarse", action: handleLogout },
+  ];
+
+  const dispatch = useAppDispatch();
+
+  function handleLogout() {
+    dispatch(logout());
+  }
   return (
     <>
       <Disclosure as="nav" className="bg-gray-800">
@@ -36,11 +44,7 @@ const Nav = () => {
               <div className="flex h-16 items-center justify-between">
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
-                    <img
-                      className="h-8 w-8"
-                      src={Logo}
-                      alt="Your Company"
-                    />
+                    <img className="h-8 w-8" src={Logo} alt="Your Company" />
                   </div>
                   <div className="hidden md:block">
                     <div className="ml-10 flex items-baseline space-x-4">
@@ -101,7 +105,7 @@ const Nav = () => {
                             <Menu.Item key={item.name}>
                               {({ active }) => (
                                 <a
-                                  href={item.href}
+                                  onClick={item.action}
                                   className={classNames(
                                     active ? "bg-gray-100" : "",
                                     "block px-4 py-2 text-sm text-gray-700"
@@ -182,7 +186,7 @@ const Nav = () => {
                     <Disclosure.Button
                       key={item.name}
                       as="a"
-                      href={item.href}
+                      onClick={item.action}
                       className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
                     >
                       {item.name}

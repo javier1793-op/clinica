@@ -1,48 +1,80 @@
 import { useForm } from "react-hook-form";
 import { userSesion } from "../../../Api/Auth";
+import { TextInput } from '@tremor/react';
+import Alert from "../../Components/Alert";
 import { useEffect, useState } from "react";
 
 const FormLogin = () => {
-  const [error, setError] = useState([]);
-  const { register, handleSubmit } = useForm();
-
-  const onSubmit = handleSubmit(async (value) => {
-    try {
-      const res = await userSesion(value);
-      console.log(res.data.token)
-      localStorage.setItem('token', res.data.token)
-    } catch (error) {
-      return setError([error.response.data.mensaje]);
-    }
-  });
+  const [error, setError] = useState('');
+  const {register,handleSubmit,}=useForm();
 
   useEffect(() => {
-    const time=setTimeout(() => {
-      setError("");
-    }, 10000);
-    return ()=> clearTimeout(time)
-  }, [error]);
+    setTimeout(() => {
+        setError('')
+    }, 5000);
+  }, [error])
+  
+
+  const onSubmit = handleSubmit(async(data)=>{
+    try {
+      const res = await userSesion(data)
+      console.log(res.data.token)
+      localStorage.setItem("userToken", res.data.token)
+    } catch (error) {
+      console.log(error.response.data.mensaje)
+      setError(error.response.data.mensaje);
+    }
+  })
+
+
 
   return (
     <>
-      {error.length > 0 && <span className="errorFormLogin">{error}</span>}
-      <form onSubmit={onSubmit}>
-        <label>Email</label>
-        <input
-          className="inputLogin"
-          type="text"
-          placeholder="Ingrese su Email"
-          {...register("email", { required: true })}
-        />
-        <label>Contraseña</label>
-        <input
-          className="inputLogin"
-          type="password"
-          placeholder="Ingrese su contraseña"
-          {...register("contraseña", { required: true })}
-        />
-        <button className="btnLogin">INGRESAR</button>
-      </form>
+     {error && <Alert message={error}/>}
+       <div className="flex min-h-full flex-1 flex-col justify-center px-4 py-10 lg:px-6">
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+          <h3 className="text-center text-tremor-title font-semibold text-tremor-content-strong dark:text-dark-tremor-content-strong">
+            Iniciar sesión
+          </h3>
+          <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
+            <label
+              htmlFor="email"
+              className="text-tremor-default font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong"
+            >
+              Email
+            </label>
+            <TextInput
+              type="email"
+              autoComplete="email"
+              placeholder="john@company.com"
+              className="mt-2"
+              {...register("email",{required:true})}
+            />
+            <label
+              htmlFor="Password"
+              className="text-tremor-default font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong"
+            >
+              Constraseña
+            </label>
+            <TextInput
+              type="password"
+              autoComplete="password"
+              placeholder="john@company.com"
+              className="mt-2"
+              {...register("contraseña",{required:true})}
+            />
+            
+            <button
+              type="submit"
+              className="btnlogin bg-red-500 mt-4 w-full whitespace-nowrap rounded-tremor-default bg-tremor-brand py-2 text-center text-tremor-default font-medium text-tremor-brand-inverted shadow-tremor-input hover:bg-tremor-brand-emphasis dark:bg-dark-tremor-brand dark:text-dark-tremor-brand-inverted dark:shadow-dark-tremor-input dark:hover:bg-dark-tremor-brand-emphasis"
+            >
+              Ingresar
+            </button>
+          </form>
+          <br />
+         
+        </div>
+      </div>
     </>
   );
 };
