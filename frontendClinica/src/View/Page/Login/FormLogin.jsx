@@ -4,6 +4,8 @@ import { TextInput } from '@tremor/react';
 import Alert from "../../Components/Alert";
 import { useEffect, useState } from "react";
 import { setCookies } from "../../../Hooks/useCookies";
+import { useAppDispatch } from "../../../Hooks/useAppSelector";
+import { login } from "../../../Store/slicer/auth.slice";
 
 const FormLogin = () => {
   const [error, setError] = useState('');
@@ -15,12 +17,14 @@ const FormLogin = () => {
     }, 5000);
   }, [error])
   
+  const dispatch = useAppDispatch()
 
   const onSubmit = handleSubmit(async(data)=>{
 
     try {
       const res = await userSesion(data)
       setCookies('token',res.data.token)
+      dispatch(login())
     } catch (error) {
      
       setError(error.response.data.mensaje);
