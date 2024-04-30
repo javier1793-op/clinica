@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { deleteCookies, getCookies } from "../../Hooks/useCookies";
 
 const initialState = {
-  isAuth: false
+  isAuth: getCookies('token') || false
 };
 
 export const authSlice = createSlice({
@@ -10,6 +11,7 @@ export const authSlice = createSlice({
   reducers: {
     logout: (state)=>{
       state.isAuth= false;
+      deleteCookies('token')
     }
   }
 });

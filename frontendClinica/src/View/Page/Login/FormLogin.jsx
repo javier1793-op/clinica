@@ -3,6 +3,7 @@ import { userSesion } from "../../../Api/Auth";
 import { TextInput } from '@tremor/react';
 import Alert from "../../Components/Alert";
 import { useEffect, useState } from "react";
+import { setCookies } from "../../../Hooks/useCookies";
 
 const FormLogin = () => {
   const [error, setError] = useState('');
@@ -16,12 +17,12 @@ const FormLogin = () => {
   
 
   const onSubmit = handleSubmit(async(data)=>{
+
     try {
       const res = await userSesion(data)
-      console.log(res.data.token)
-      localStorage.setItem("userToken", res.data.token)
+      setCookies('token',res.data.token)
     } catch (error) {
-      console.log(error.response.data.mensaje)
+     
       setError(error.response.data.mensaje);
     }
   })

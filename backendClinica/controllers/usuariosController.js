@@ -66,7 +66,7 @@ exports.iniciarSesion = async (req, res) => {
 
         jwt.sign(payload, 'secreto', { expiresIn: 3600 }, (error, token) => {
             if (error) throw error;
-            res.json({ token });
+            res.json({ token, doctor: usuario.doctor });
         });
     } catch (error) {
         console.error(error);
