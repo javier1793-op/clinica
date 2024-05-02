@@ -1,9 +1,12 @@
+// store.js
 import { configureStore } from '@reduxjs/toolkit';
-import authReducer from './slicer/auth.slice';
+import rootReducer from './rootReducer';
+import { persistStore } from 'redux-persist';
 
 export const store = configureStore({
-  reducer: {
-    auth: authReducer
-  }
+  reducer: rootReducer,
+  // otros middleware y opciones aquí si las tienes
 });
+
+export const persistor = persistStore(store);
 

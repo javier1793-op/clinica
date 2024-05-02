@@ -5,6 +5,8 @@ const initialState = {
   isAuth: false
 };
 
+
+
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -15,7 +17,8 @@ export const authSlice = createSlice({
     logout: (state)=>{
       state.isAuth= false;
       deleteCookies('token')
-    }
+    },
+  
   }
 });
 

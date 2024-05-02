@@ -5,7 +5,7 @@ import Alert from "../../Components/Alert";
 import { useEffect, useState } from "react";
 import { setCookies } from "../../../Hooks/useCookies";
 import { useAppDispatch } from "../../../Hooks/useAppSelector";
-import { login } from "../../../Store/slicer/auth.slice";
+import { login} from "../../../Store/slicer/auth.slice";
 
 const FormLogin = () => {
   const [error, setError] = useState('');
