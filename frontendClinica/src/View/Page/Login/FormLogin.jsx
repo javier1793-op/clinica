@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { setCookies } from "../../../Hooks/useCookies";
 import { useAppDispatch } from "../../../Hooks/useAppSelector";
 import { login} from "../../../Store/slicer/auth.slice";
+import { DoctorID } from "../../../Api/Doctor";
+import { setDoctorData } from "../../../Store/slicer/doctor.slice";
 
 const FormLogin = () => {
   const [error, setError] = useState('');
@@ -25,6 +27,10 @@ const FormLogin = () => {
       const res = await userSesion(data)
       setCookies('token',res.data.token)
       dispatch(login())
+
+
+      const doctorData= await DoctorID(res.data.doctor)
+      dispatch(setDoctorData(doctorData.data))
     } catch (error) {
      
       setError(error.response.data.mensaje);

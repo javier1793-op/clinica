@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; 
 import authReducer from './slicer/auth.slice';
+import doctorReducer from './slicer/doctor.slice'
 
 const authPersistConfig = {
   key: 'auth',
@@ -11,7 +12,7 @@ const authPersistConfig = {
 
 const rootReducer = combineReducers({
   auth: persistReducer(authPersistConfig, authReducer),
-  // otros reducers aquí
+  doctor:doctorReducer
 });
 
 export default rootReducer;
