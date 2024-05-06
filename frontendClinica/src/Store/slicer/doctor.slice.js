@@ -2,7 +2,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  doctorData: null,
+  doctorData: [],
 };
 
 export const doctorSlice = createSlice({

@@ -16,6 +16,11 @@ import {
   TableHeaderCell,
   TableRow,
 } from "@tremor/react";
+import { useAppDispatch, useAppSelector } from "../../../Hooks/useAppSelector";
+import { useEffect, useState } from "react";
+import { cargarTurnos } from "../../../Store/slicer/turno.slice";
+import { DoctorID } from "../../../Api/Doctor";
+import { PacienteID } from "../../../Api/Paciente";
 
 // This example requires @tanstack/react-table
 
@@ -23,32 +28,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const workspaces = [
-  {
-    fecha: "23/09/2023",
-    paciente: "John Doe",
-    motivo: "consulta prevista",
-    doctor: "Suarez",
-  },
-  {
-    fecha: "24/09/2023",
-    paciente: "Gohn4 Doe",
-    motivo: "consulta prevista",
-    doctor: "Suarez",
-  },
-  {
-    fecha: "13/09/2023",
-    paciente: "Kohn3 Doe",
-    motivo: "consulta prevista",
-    doctor: "Suarez",
-  },
-  {
-    fecha: "03/09/2023",
-    paciente: "John Doe",
-    motivo: "consulta prevista",
-    doctor: "Suarez",
-  },
-];
+
 
 const workspacesColumns = [
   {
@@ -94,15 +74,49 @@ const workspacesColumns = [
 ];
 
 export default function TableTurnos() {
+
+  const dispatch = useAppDispatch();
+  const dataTurnos = useAppSelector(state => state.turno.turnosData);
+  const [turnosConNombres, setTurnosConNombres] = useState([]);
+
+  // Función para cargar los nombres de los doctores y pacientes
+  const cargarNombres = async () => {
+    const turnosConNombresActualizados = await Promise.all(
+      dataTurnos.map(async (turno) => {
+        const doctorResponse = await DoctorID(turno.doctor);
+        const pacienteResponse = await PacienteID(turno.paciente);
+
+        const nombreDoctor = doctorResponse.data.nombre;
+        const nombrePaciente = pacienteResponse.data.nombre;
+        
+        return {
+          ...turno,
+          doctor:nombreDoctor,
+          paciente:nombrePaciente,
+        };
+      })
+    );
+
+    setTurnosConNombres(turnosConNombresActualizados);
+  };
+
+  useEffect(() => {
+    dispatch(cargarTurnos());
+  }, [dispatch]); 
+
+  useEffect(() => {
+    cargarNombres();
+  }, [dataTurnos]);
+
   const table = useReactTable({
-    data: workspaces,
-    columns: workspacesColumns,
-    getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
+    data: turnosConNombres, 
+    columns: workspacesColumns, 
+    getCoreRowModel: getCoreRowModel(), 
+    getSortedRowModel: getSortedRowModel(), 
     initialState: {
       sorting: [
         {
-          id: "workspace",
+          id: "dataTurnos",
           desc: false,
         },
       ],
