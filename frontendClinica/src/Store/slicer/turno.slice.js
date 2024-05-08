@@ -35,6 +35,6 @@ export const turnoSlice = createSlice({
   },
 });
 
-// Exporta el reducer de turnos y la acción asíncrona para cargar los turnos
+
 export const { selectTurnosData } = turnoSlice.actions;
 export default turnoSlice.reducer;
