@@ -7,3 +7,8 @@ export const DoctorID = (doctorId) => {
     const url = `${API}/doctor/${doctorId}`;
     return axios.get(url);
   };
+
+export const DoctorGet = ()=> {
+  const url=`${API}/doctor`
+  return axios.get(url)
+}

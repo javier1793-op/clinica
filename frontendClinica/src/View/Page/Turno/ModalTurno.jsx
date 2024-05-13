@@ -1,8 +1,38 @@
 // 'use client';
 import { Divider, TextInput } from "@tremor/react";
+import { DoctorGet } from "../../../Api/Doctor";
+import { useEffect, useState } from "react";
+import { PacienteGet } from "../../../Api/Paciente";
+import PacienteDetalle from "./PacienteDetalle";
 
 export default function ModalTurno({ closeModal }) {
   const today = new Date().toISOString().split("T")[0];
+  const [doctores, setDoctores] = useState([])
+  const [paciente, setPaciente] = useState()
+  
+  useEffect(() => {
+    const listDoctores = async () => {
+      try {
+        const resp = await DoctorGet();
+        setDoctores(resp.data)
+        console.log(paciente)
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  
+    listDoctores();
+  }, []);
+  
+  const handlePaciente = async (dni)=>{
+    try {
+      const resp = await PacienteGet()
+      const pacienteBuscado= resp.data.filter(item => item.dni === dni)
+      setPaciente(pacienteBuscado)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <>
@@ -61,7 +91,15 @@ export default function ModalTurno({ closeModal }) {
                 placeholder="DNI"
                 className="mt-2"
                 required
+                onBlur={(event) => {
+                  handlePaciente(event.target.value);
+                }}
               />
+            </div>
+            <div className="col-span-full">
+            <PacienteDetalle
+            paciente={paciente}
+            />
             </div>
             <div className="col-span-full sm:col-span-3">
               <label className="text-tremor-default font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
@@ -70,9 +108,14 @@ export default function ModalTurno({ closeModal }) {
               <br />
               <select id="doctor" name="doctor" className="mt-2 hora">
                 <option value="">Seleccione el doctor</option>
-                <option value="doctor1">Doctor 1</option>
-                <option value="doctor2">Doctor 2</option>
-                <option value="doctor3">Doctor 3</option>
+                {doctores.map( doctor =>(
+                  
+                <option 
+                key={doctor._id}
+                value={doctor._id}>
+                  {`${doctor.apellido} ${doctor.nombre}`}
+                </option>
+                ))}
               </select>
             </div>
             
