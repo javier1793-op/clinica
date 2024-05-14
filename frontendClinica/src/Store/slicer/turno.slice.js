@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { turnoGet } from '../../Api/Turno';
+import { turnoAdd, turnoGet } from '../../Api/Turno';
 
 const initialState = {
   turnosData: [],
@@ -12,7 +12,10 @@ export const cargarTurnos = createAsyncThunk('turnos/cargarTurnos', async () => 
     return response.data; 
   });
   
-
+  export const agregarTurno = createAsyncThunk('turnos/agregarTurno', async (dataTurno) => {
+    const response = await turnoAdd(dataTurno); 
+    return response.data; 
+  });
 
 export const turnoSlice = createSlice({
   name: 'turno',
@@ -31,6 +34,19 @@ export const turnoSlice = createSlice({
       .addCase(cargarTurnos.rejected, (state, action) => {
         state.loading = 'error'; 
         state.error = action.error.message; 
+      })
+      .addCase(agregarTurno.pending, (state) => {
+        state.loading = 'cargando'; 
+        state.error = null; 
+      })
+      .addCase(agregarTurno.fulfilled, (state, action) => {
+        state.loading = 'exito'; 
+        state.turnosData.push(action.payload); 
+      })
+      .addCase(agregarTurno.rejected, (state, action) => {
+        state.loading = 'error'; 
+        state.error = action.error.message; 
+        console.log(state.error)
       });
   },
 });

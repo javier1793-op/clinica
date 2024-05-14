@@ -4,11 +4,15 @@ import { DoctorGet } from "../../../Api/Doctor";
 import { useEffect, useState } from "react";
 import { PacienteGet } from "../../../Api/Paciente";
 import PacienteDetalle from "./PacienteDetalle";
+import { useForm } from "react-hook-form";
+import { useAppDispatch } from "../../../Hooks/useAppSelector";
+import {  agregarTurno } from "../../../Store/slicer/turno.slice";
 
 export default function ModalTurno({ closeModal }) {
   const today = new Date().toISOString().split("T")[0];
   const [doctores, setDoctores] = useState([])
   const [paciente, setPaciente] = useState()
+  const { register, handleSubmit, watch} = useForm();
   
   useEffect(() => {
     const listDoctores = async () => {
@@ -23,6 +27,28 @@ export default function ModalTurno({ closeModal }) {
   
     listDoctores();
   }, []);
+
+  const combineFechaHora = (fecha, hora) => {
+    const fechaObj = new Date(fecha);
+    const [hours, minutes] = hora.split(':');
+    fechaObj.setHours(hours, minutes);
+    return fechaObj.toISOString();
+  };
+
+  const dispatch= useAppDispatch()
+
+  const onSubmit = handleSubmit(async (data) => {
+    const combinedFechaHora = combineFechaHora(data.fecha, data.hora);
+    const { hora,dni, ...rest } = data; 
+    const formData = {
+      ...rest,
+      fecha: combinedFechaHora,
+      paciente: paciente[0]._id
+    };
+    console.log(formData);
+    console.log(paciente._id)
+    dispatch(agregarTurno(formData)); 
+  });
   
   const handlePaciente = async (dni)=>{
     try {
@@ -33,6 +59,13 @@ export default function ModalTurno({ closeModal }) {
       console.log(error)
     }
   }
+  const dni = watch('dni');
+
+  useEffect(() => {
+    if (dni) {
+      handlePaciente(dni);
+    }
+  }, [dni]);
 
   return (
     <>
@@ -43,7 +76,7 @@ export default function ModalTurno({ closeModal }) {
         <p className="mt-1 text-tremor-default leading-6 text-tremor-content dark:text-dark-tremor-content">
           {" (*) son obligatorios "}
         </p>
-        <form action="#" method="post" className="mt-8">
+        <form  className="mt-8" onSubmit={handleSubmit(onSubmit)} >
           <div className="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-6">
             <div className="col-span-full sm:col-span-3">
               <label className="text-tremor-default font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
@@ -59,6 +92,7 @@ export default function ModalTurno({ closeModal }) {
                 className="mt-2"
                 required
                 min={today}
+                {...register("fecha",{required:true})}
               />
             </div>
             <div className="col-span-full sm:col-span-3">
@@ -75,6 +109,7 @@ export default function ModalTurno({ closeModal }) {
                 required
                 min="08:00"
                 max="21:00"
+                {...register("hora",{required:true})}
               />
             </div>
 
@@ -91,16 +126,17 @@ export default function ModalTurno({ closeModal }) {
                 placeholder="DNI"
                 className="mt-2"
                 required
-                onBlur={(event) => {
-                  handlePaciente(event.target.value);
-                }}
+                
+                {...register("dni",{required:true})}
               />
             </div>
+           {paciente &&
             <div className="col-span-full">
             <PacienteDetalle
             paciente={paciente}
             />
             </div>
+           }
             <div className="col-span-full sm:col-span-3">
               <label className="text-tremor-default font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
                 Doctor
@@ -112,8 +148,11 @@ export default function ModalTurno({ closeModal }) {
                   
                 <option 
                 key={doctor._id}
-                value={doctor._id}>
+                value={doctor._id}
+                {...register("doctor",{required:true})}
+                >
                   {`${doctor.apellido} ${doctor.nombre}`}
+                 
                 </option>
                 ))}
               </select>
@@ -130,6 +169,7 @@ export default function ModalTurno({ closeModal }) {
                 id="motivo-description"
                 name="motivo-description"
                 rows="4"
+                {...register("motivo",{required:true})}
               ></textarea>
             </div>
           </div>
